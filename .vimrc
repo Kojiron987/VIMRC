@@ -24,6 +24,7 @@ set nobackup
 set noswapfile
 set autoread
 set hidden
+set encoding=utf-8
 
 " Show last command in status line.
 set showcmd                 
@@ -77,6 +78,8 @@ tnoremap <c-l> <c-w><c-l>
 
 " Save a file with leader-w.
 noremap <leader>w :w<cr>
+" Quit Vim with leader-q.
+noremap <leader>q :q<cr>
 
 " Disable highlighting after pressing double esc key.
 nnoremap <esc><esc> :nohlsearch<CR><esc>
