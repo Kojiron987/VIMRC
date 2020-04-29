@@ -28,12 +28,20 @@ set encoding=utf-8
 
 " Show last command in status line.
 set showcmd                 
-
 set laststatus=2            " Always show status
-
 set number
+
 filetype plugin indent on   " Enable file type based indentation.
 set autoindent              " Respect indentation when starting a new line
+set expandtab               " Expand tabs to spaces. Essential in Python.
+set tabstop=4               " Number of spaces tab is counted for.
+set shiftwidth=4            " Number of sapces to use for autoindent.
+set softtabstop=4
+set backspace=2             " Fix backspace behavior on most terminals.
+
+autocmd FileType css        setlocal sw=2 ts=2 
+autocmd FileType html       setlocal sw=2 ts=2 
+
 set showmatch
 set wildmenu                " Enabled enhanced tab autocomplete.
 set wildmode=list:longest,full   " Complete till longest string
@@ -46,11 +54,6 @@ set tags=tags;              " Look for a tags file recursively in
 " autocmd BufWritePost *.py silent! !ctags -R &
 " Regenerate tags when saving c++ files.
 " autocmd BufWritePost *.cpp *.h silent! !ctags -R &
-
-set expandtab               " Expand tabs to spaces. Essential in Python.
-set tabstop=4               " Number of spaces tab is counted for.
-set shiftwidth=4            " Number of sapces to use for autoindent.
-set backspace=2             " Fix backspace behavior on most terminals.
 
 set ignorecase
 set smartcase
@@ -120,3 +123,4 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") &&
             \ b:NERDTree.isTabTree()) | q | endif
 " Short cut for toggling NERDTree
 noremap <leader>n :NERDTreeToggle<cr>
+
