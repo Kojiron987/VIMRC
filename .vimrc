@@ -5,12 +5,14 @@ let mapleader = "\<space>"
 call plug#begin()
 
 Plug('scrooloose/nerdtree')
+Plug('tpope/vim-unimpaired')
 Plug('tpope/vim-vinegar')
 Plug('ctrlpvim/ctrlp.vim')
 Plug('easymotion/vim-easymotion')
 Plug('sjl/gundo.vim')
 Plug('tpope/vim-fugitive')
 Plug('vim-airline/vim-airline')
+Plug('mileszs/ack.vim')
 
 " colorscheme
 Plug('felipesousa/rupza')
@@ -61,6 +63,13 @@ set incsearch
 set wrapscan
 set hlsearch
 
+" Set up persistent undo across all files.
+set undofile
+if !isdirectory(expand('$HOME/.vim/undodir'))
+    call mkdir(expand('$HOME/.vim/undodir'), 'p')
+endif
+set undodir=expand('$HOME/.vim/undodir')
+
 " Immediatly add a closing quotes or braces in insert mode.
 " inoremap ' ''<esc>i
 " inoremap ( ()<esc>i
@@ -84,9 +93,6 @@ noremap <leader>w :w<cr>
 " Quit Vim with leader-q.
 noremap <leader>q :q<cr>
 
-" Disable highlighting after pressing double esc key.
-nnoremap <esc><esc> :nohlsearch<CR><esc>
-
 set termguicolors
 colorscheme rupza
 
@@ -94,33 +100,20 @@ command! Bd :bp | :sp | :bn | :bd " Close buffer without closing window.
 
 autocmd BufRead * normal zR         " Open folds when opening buffer.
 
-" NERDTree setting
-let NERDTreeShowBookmarks = 1 " Always show bookmarks.
-let NERDTreeHijackNetrw = 0    " Avoid NERDTree replacing Netrw.
-autocmd VimEnter * NERDTree " Enable NERDTree on Vim startup.
-" Autoclose NERDTree if it's the only open window left.
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") &&
-            \ b:NERDTree.isTabTree()) | q | endif
-" Short cut for toggling NERDTree
-noremap <leader>n :NERDTreeToggle<cr>
-" Save a file with leader-w.
-noremap <leader>w :w<cr>
-
 " Disable highlighting after pressing double esc key.
 nnoremap <esc><esc> :nohlsearch<CR><esc>
 
+nnoremap <C-b> :CtrlPBuffer<cr>
 
 command! Bd :bp | :sp | :bn | :bd " Close buffer without closing window.
-
-autocmd BufRead * normal zR         " Open folds when opening buffer.
 
 " NERDTree setting
 let NERDTreeShowBookmarks = 1 " Always show bookmarks.
 let NERDTreeHijackNetrw = 0    " Avoid NERDTree replacing Netrw.
-autocmd VimEnter * NERDTree " Enable NERDTree on Vim startup.
+" Enable NERDTree on Vim startup.
+autocmd VimEnter * NERDTree 
 " Autoclose NERDTree if it's the only open window left.
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") &&
             \ b:NERDTree.isTabTree()) | q | endif
 " Short cut for toggling NERDTree
 noremap <leader>n :NERDTreeToggle<cr>
-
